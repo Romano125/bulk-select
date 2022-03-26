@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-import { BulkSelectContext } from './types';
+import { BulkSelectContext } from 'src/types';
 
 export default createContext<BulkSelectContext>([{}, () => ({})]);

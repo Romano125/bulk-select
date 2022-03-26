@@ -1,5 +1,4 @@
-import BulkSelectContext from './context';
-import BulkSelectProvider from './provider';
-import useSelect from './useSelect';
+import BulkSelectProvider from 'src/provider';
+import useSelect from 'src/useSelect';
 
-export default { useSelect, BulkSelectContext, BulkSelectProvider };
+export default { useSelect, BulkSelectProvider };

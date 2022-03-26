@@ -1,33 +1,36 @@
-type SelectedItem = { id: number | string };
+import { SelectedItem, SelectedItems } from 'src/types';
 
 const getSelectedItemsAfterSelect = (
-  state: { [key: string]: SelectedItem[] },
-  items: SelectedItem[],
-  itemsKey: string
-): { [key: string]: SelectedItem[] } => ({
-  ...state,
-  [itemsKey]: !(itemsKey in state)
-    ? items
-    : [
-        ...state[itemsKey],
-        ...items.filter(
-          (payloadItems) =>
-            !state[itemsKey].some((item) => item.id === payloadItems.id)
-        ),
-      ],
+    state: SelectedItems,
+    newItems: SelectedItem[],
+    itemsKey: string,
+): SelectedItems => ({
+    ...state,
+    [itemsKey]: !(itemsKey in state)
+        ? newItems
+        : [
+              ...state[itemsKey],
+              ...newItems.filter(
+                  (newItem) =>
+                      !state[itemsKey].some(
+                          (selectedItem: SelectedItem) => selectedItem.id === newItem.id,
+                      ),
+              ),
+          ],
 });
 
 const getSelectedItemsAfterUnselect = (
-  state: { [key: string]: SelectedItem[] },
-  items: SelectedItem[],
-  itemsKey: string
-): { [key: string]: SelectedItem[] } => ({
-  ...state,
-  [itemsKey]: !(itemsKey in state)
-    ? []
-    : state[itemsKey].filter(
-        (selectedItem) => !items.some((item) => item.id === selectedItem.id)
-      ),
+    state: SelectedItems,
+    newItems: SelectedItem[],
+    itemsKey: string,
+): SelectedItems => ({
+    ...state,
+    [itemsKey]: !(itemsKey in state)
+        ? []
+        : state[itemsKey].filter(
+              (selectedItem: SelectedItem) =>
+                  !newItems.some((newItem: SelectedItem) => newItem.id === selectedItem.id),
+          ),
 });
 
 export default { getSelectedItemsAfterSelect, getSelectedItemsAfterUnselect };
