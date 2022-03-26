@@ -1,6 +1,9 @@
 {
     "name": "bulk-select",
     "version": "0.1.0",
+    "author": "Romano Polic",
+    "license": "MIT",
+    "private": false,
     "description": "Typescript package for working with the bulk select operations.",
     "keywords": [
         "bulk",
