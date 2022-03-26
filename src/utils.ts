@@ -33,4 +33,9 @@ const getSelectedItemsAfterUnselect = (
           ),
 });
 
-export default { getSelectedItemsAfterSelect, getSelectedItemsAfterUnselect };
+const resetStateByItemsKey = (state: SelectedItems, itemsKey: string): SelectedItems => ({
+    ...state,
+    [itemsKey]: [],
+});
+
+export default { getSelectedItemsAfterSelect, getSelectedItemsAfterUnselect, resetStateByItemsKey };

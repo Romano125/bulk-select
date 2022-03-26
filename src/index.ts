@@ -1,4 +1,4 @@
 import BulkSelectProvider from 'src/provider';
-import useSelect from 'src/useSelect';
+import useBulkSelect from 'src/useBulkSelect';
 
-export default { useSelect, BulkSelectProvider };
+export { useBulkSelect, BulkSelectProvider };

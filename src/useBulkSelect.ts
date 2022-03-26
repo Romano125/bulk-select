@@ -2,10 +2,10 @@ import { useCallback, useContext, useMemo } from 'react';
 
 import context from 'src/context';
 import utils from 'src/utils';
-import { IUseSelect } from 'src/interfaces';
+import { IUseBulkSelect } from 'src/interfaces';
 import { SelectedItem, SelectedItems } from 'src/types';
 
-const useSelect = (itemsKey: string): IUseSelect => {
+const useBulkSelect = (itemsKey: string): IUseBulkSelect => {
     const [selected, setSelected] = useContext(context);
 
     const selectedByKey: SelectedItem[] = useMemo(
@@ -22,9 +22,9 @@ const useSelect = (itemsKey: string): IUseSelect => {
     );
 
     const pageSelectedItems = useCallback(
-        (items: SelectedItem[]) =>
+        (pageItems: SelectedItem[]) =>
             selectedByKey.filter((selectedItem: SelectedItem) =>
-                items.some((item: SelectedItem) => item.id === selectedItem.id),
+                pageItems.some((pageItem: SelectedItem) => pageItem.id === selectedItem.id),
             ),
         [selectedByKey],
     );
@@ -58,6 +58,16 @@ const useSelect = (itemsKey: string): IUseSelect => {
         [isSelected, selectItems, unselectItems],
     );
 
+    const clearStateByItemsKey = useCallback(
+        () =>
+            setSelected((prevSelected: SelectedItems) =>
+                utils.resetStateByItemsKey(prevSelected, itemsKey),
+            ),
+        [itemsKey, setSelected],
+    );
+
+    const clearState = useCallback(() => setSelected({}), [setSelected]);
+
     return {
         handleSelect,
         handleSelectAll,
@@ -65,7 +75,9 @@ const useSelect = (itemsKey: string): IUseSelect => {
         pageSelectedItems,
         selected: selectedByKey,
         totalSelected,
+        clearStateByItemsKey,
+        clearState,
     };
 };
 
-export default useSelect;
+export default useBulkSelect;
