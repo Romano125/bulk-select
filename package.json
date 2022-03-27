@@ -5,6 +5,7 @@
     "license": "MIT",
     "private": false,
     "description": "Typescript package for working with the bulk select operations.",
+    "main": "src",
     "keywords": [
         "bulk",
         "select",
